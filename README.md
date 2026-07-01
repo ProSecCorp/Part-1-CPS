@@ -6,11 +6,11 @@
 <p align="center">Project for the Course on
 Cyber-Physical Systems and IoT Security (MSc ICT for Internet and Multimedia, A.Y. 2025/26) at University of Padua.</p>
 
-# Members
+## Members
 - Emanuele Artusi | 2198545
 - Filippo Bellon | XXXXXXX
 
-# Reference paper
+## Reference paper
 [Tractor Beam: Safe-hijacking of Consumer Drones with Adaptive GPS Spoofing](./Reference-paper.pdf)
 
 ## Setup
