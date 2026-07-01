@@ -1,0 +1,40 @@
+\begin{titlepage}
+% Sfondo blu scuro
+\pagecolor{darkblue}
+
+\begin{tikzpicture}[remember picture, overlay]
+% Titolo del progetto
+    \node[font=\sffamily, align=center, text=white,  yshift=-5cm] at (current page.north) {
+        {\fontsize{28}{32}\selectfont Report for the Course on}\\ [0.2cm]{\fontsize{28}{32}\selectfont Cyber-Physical Systems and IoT Security}\\[1cm]
+        {\fontsize{26}{0}\selectfont \textbf{First mid-term project}}\\[1cm]
+    };
+
+    % Logo
+    \node[anchor=north west, xshift=0.5cm, yshift=-4cm] 
+        {\includegraphics[width=8cm]{./Data/Images/logo.jpeg}};
+
+    
+    % Evidenzia ProSecCo con colori
+    \node[anchor=north east, xshift=-6cm, yshift=-9.3cm, align=left, text=white, font=\sffamily\bfseries] at (current page.north east) {
+        {\fontsize{24}{28}\selectfont \textcolor{lightblue}{Pro}\textcolor{white}{fessional}}\\[0.2cm]
+        {\fontsize{24}{28}\selectfont \textcolor{lightblue}{Sec}\textcolor{white}{urity}}\\
+        {\fontsize{24}{28}\selectfont \textcolor{lightblue}{Co}\textcolor{white}{rporation}}
+    };
+
+    % Nomi
+    \node[align=center, text=white, font=\sffamily, yshift=-4cm] at (current page.center) {
+        {\fontsize{22}{0}\selectfont \textbf{Members}}\\[0.3cm]
+        {\fontsize{22}{0}\selectfont Emanuele Artusi | 2198545}\\[0.2cm]
+        {\fontsize{22}{0}\selectfont Filippo Bellon | XXXXXXX}\\[2cm]
+        {\fontsize{22}{0}\selectfont \textbf{Reference paper}}\\[0.3cm]
+        {\fontsize{28}{32}\selectfont Lorem ipsum dolor sit amet, consectetur}\\ [0.2cm]
+        {\fontsize{28}{32}\selectfont adipiscing elit, sed do eiusmod tempor incididunt.}
+    };
+    \node[align=center, text=white, font=\sffamily, yshift=-13cm] at (current page.center) {
+        {\fontsize{18}{20}\selectfont A.Y. 2025/26}
+    };
+\end{tikzpicture}
+
+\end{titlepage}
+
+\nopagecolor

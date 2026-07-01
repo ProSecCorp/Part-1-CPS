@@ -1,0 +1,3 @@
+$out_dir = '../';
+$jobname = 'Report';
+$out_name = 'Report';
