@@ -1,0 +1,44 @@
+\section{ArduPilot SITL setup}
+
+First thing we want to do is setting up Ardupilot SITL. We do that by following the official guide to make it work under the WSL system on a Windows 11 PC.
+This will also create a special Python environment to better manage packages and necessary modules needed to run Ardupilot.
+After setting all up we start it up by using a special command:
+
+\begin{minted}[breaklines]{bash}
+python3 /home/darckat038/uni/cps/ardupilot/Tools/autotest/sim_vehicle.py -v ArduCopter --console --map --mavproxy-args="--load-module=batteryreset --out=127.0.0.1:14550 --out=127.0.0.1:14549 --out=127.0.0.1:14548 --out=127.0.0.1:14547 --out=127.0.0.1:14546 --out=127.0.0.1:14545 --cmd=\"param set RTL_ALT_FINAL_M 15\""
+\end{minted}
+
+With this command we are able to:
+\begin{itemize}
+    \item use the ArduCopter as represented vehicle;
+    \item show the console and the map to better visualize the drone movement and flight status;
+    \item set alternative output ports to communicate with MavProxy using multiple programs;
+    \item set a final altitude for the \textit{Return to Land} (RTL) mode.
+    
+\end{itemize}
+
+\section{Python Helper Functions/Classes}
+
+To better achieve what we need we decided to apply the "divide and conquer" paradygm, where we created multiple Python classes, thus dividing responsibilities among multiple parts of the program.
+
+\subsection{GPSReader}
+
+The first and most important is the \textit{GPSReader} class. This particularly useful Python class enabled us to continuously request the GPS position of the drone from the MAVProxy software by using a specifically exposed API, accessible through the ports we requested in the launch command. Latitude, Longitude and Altitude were the main requested parameters.
+
+\subsection{FlightMonitor}
+
+Then comes \textit{FlightMonitor}, which helped mainly to acquire information about the ongoing mission like the number of waypoints, the index of the landing waypoint and so on. Were also included function to gather informations about events and status changes which helped us better understand the thresholds and limits supported by the flight controller.
+
+\subsection{GlitchController}
+
+The \textit{GlitchController} class, as the name says, had the obvious goal of setting and getting the desired glitch parameters through an API endpoint.
+
+\subsection{FlightLogger}
+
+To a \textit{FlightLogger} class has then been given the task of logging every step of the GPS of the drone, along with the currently set glitch and any events that may occur during the spoofing period.
+
+\subsection{Other Utils}
+
+\subsubsection{Distance}
+
+A \textit{distance} method has been written to compute the distance between two coordinates and help with the progressive/adaptive glitch computations and development.
