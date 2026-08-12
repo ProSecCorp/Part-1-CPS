@@ -46,20 +46,22 @@ choice = input(
     "Scegli tipo glitch (1=small, 2=big): "
 ).strip()
 
-if choice == "1":
-    GLITCH_X = 0.00003
-    GLITCH_Y = 0
-    ATTACK_TIME = 15
-    log = FlightLogger("logs/constant_small_glitch.csv")
-    print("Iniezione small glitch selezionata")
-elif choice == "2":
-    GLITCH_X = 0.00006
-    GLITCH_Y = 0
-    log = FlightLogger("logs/constant_big_glitch.csv")
-    print("Iniezione big glitch selezionata")
-else:
-    print("Scelta non valida: inserisci 1 oppure 2")
-    raise SystemExit(1)
+match choice:
+    case "1":
+        GLITCH_X = 0.000025
+        GLITCH_Y = 0
+        ATTACK_TIME = 15
+        log = FlightLogger("logs/constant_small_glitch.csv")
+        print("Iniezione small glitch selezionata")
+    case "2":
+        GLITCH_X = 0.00006
+        GLITCH_Y = 0
+        ATTACK_TIME = 15
+        log = FlightLogger("logs/constant_big_glitch.csv")
+        print("Iniezione big glitch selezionata")
+    case _:
+        print("Scelta non valida: inserisci 1 o 2")
+        raise SystemExit(1)
 
 land_seq = monitor.get_land_waypoint_seq()
 if land_seq is None:
@@ -111,6 +113,10 @@ while True:
 
     time.sleep(0.1)
 
+print("Waypoint di atterraggio raggiunto, stop glitching")
+
+time.sleep(5)  # Attendi 5 secondi
+    
 # Cleanup finale
 glitch.reset()
 log.close()
