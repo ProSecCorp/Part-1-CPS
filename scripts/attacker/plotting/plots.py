@@ -61,18 +61,11 @@ def plot_file(filename):
     plt.show()
 
 
-choice = input("Scegli il file da plottare \n1=constant_no_glitch\n2=constant_small\n3=constant_big\n4=adaptive_no_glitch\nScelta: ").strip()
+choice = input("Scegli il file da plottare (1=constant, 2=adaptive): ").strip()
 
-match choice:
-    case "1":
-        plot_file("logs/constant_no_glitch.csv")
-    case "2":
-        plot_file("logs/constant_small_glitch.csv")
-    case "3":
-        plot_file("logs/constant_big_glitch.csv")
-    case "4":
-        plot_file("logs/adaptive_no_direction_glitch.csv")
-    case "5":
-        plot_file("logs/adaptive_nord_est_glitch.csv")
-    case _:
-        print("Scelta non valida: inserisci 1, 2, 3 o 4")
+if choice == "1":
+    plot_file("logs/constant.csv")
+elif choice == "2":
+    plot_file("logs/adaptive.csv")
+else:
+    print("Scelta non valida: inserisci 1 oppure 2")
