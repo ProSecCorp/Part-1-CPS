@@ -30,9 +30,9 @@ This value was chosen because, after several tests, it was found to be the maxim
     \caption{Map view of small glitch test.}
 \end{figure}
 
-As shown in the figure, the glitch is introduced after the drone has entered \texttt{AUTO} mode and started following the predefined mission trajectory. In particular, the injection begins once the drone reaches an altitude of approximately 10 meters, as shown in Figure~\ref{fig:small_glitch_start}. The glitch is maintained for approximately 30 seconds. During this interval, a small and almost imperceptible deviation from the original trajectory can be observed. This change is highlighted by the yellow dashed line, which represents the altered trajectory resulting from the injected GPS offset.
+As shown in the figure, the glitch is introduced after the drone has entered \texttt{AUTO} mode and started following the predefined mission trajectory. In particular, the injection begins once the drone reaches an altitude of approximately 10 meters, as shown in Figure~\ref{fig:small_glitch_start}. The glitch is maintained for approximately 15 seconds. During this interval, a small and almost imperceptible deviation from the original trajectory can be observed. This change is highlighted by the yellow dashed line, which represents the altered trajectory resulting from the injected GPS offset.
 
-After approximately 30 seconds, the glitch is reset to zero. Following the reset, the trajectory exhibits another small variation, also visible through the yellow dashed line in Figure~\ref{fig}. In this case, however, the resulting position discrepancy remains sufficiently small that it does not trigger a GPS glitch warning from the flight controller.
+After approximately 30 seconds, the glitch is reset to zero. Following the reset, the trajectory exhibits another small variation, also visible through the yellow dashed line in Figure~\ref{fig:small_glitch_end}. In this case, however, the resulting position discrepancy remains sufficiently small that it does not trigger a GPS glitch warning from the flight controller.
 
 \subsubsection{Big Offset}
 
@@ -76,8 +76,65 @@ As the glitch persists, the flight controller continues to reject or compensate 
     \caption{Map view of big glitch removed.}
 \end{figure}
 
-A similar transition can be observed when the injected glitch is removed. When the glitch value is reset to zero, the GPS position changes back towards the original position, again creating a discrepancy with the position estimated by the flight controller (Figure \ref{fig:big_glitch_end_middle}). 
+A similar transition can be observed when the injected glitch is removed. When the glitch value is reset to zero, the GPS position changes back towards the original position, again creating a discrepancy with the position estimated by the flight controller (Figure \ref{fig:big_glitch_end_middle}).
 As a result, the two trajectories temporarily diverge once more before progressively converging. The flight controller, consequently, performs the necessary estimator adjustments to accommodate the change in the GPS measurement, after which the GPS position is once again considered consistent, and the \texttt{Glitch cleared} message is generated (Figure \ref{fig:big_glitch_end_realign}).
 
 \subsection{Progressive/Adaptive GPS Spoofing}
 
+As the final test we then proceded with a progressive GPS spoofing approach, where the offset is incrementally increased as the drone moves along a predefined multi-point trajectory. The goal of this test was to observe how the flight controller adapts to gradually changing GPS measurements and whether it can maintain stable flight under these conditions without going into an error state.
+
+First of all the program asks the user to input the desired spoofing direction, which can be either \textbf{North}, \textbf{South}, \textbf{East}, \textbf{West} or their combinations. Then sets an offset increment to the glitch of 0.00001° and applies it to the x-axis and/or y-axis depending on the chosen direction (for example, to spoof North-West, the program will apply a -0.00001° offset increment to the x-axis and a 0.00001° offset increment to the y-axis).
+
+In parallel to the offset increment, every 0.5 seconds a second thread will log the GPS position, the x-glitch, the y-glitch and any events reported by the flight controller. This logging process will continue until the drone reaches the last waypoint and will stop some time after the landing procedure is started.
+
+Given that the test mission is composed of 3 waypoints and a final landing on the last one, the program has been designed to increment the glitch only when the drone has been away from the previous waypoint for a couple of seconds and is more than 50 meters away from the next waypoint, in order to make it reach an ideal speed to avoid detection and errors from the flight controller and the GPS.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{progressive_glitch/arriving_position.png}
+        \caption{Arrival position.}
+        \label{fig:progressive_arriving}
+    \end{subfigure}\hfill
+    \begin{subfigure}{.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{progressive_glitch/glitching_position.png}
+        \caption{Glitching position.}
+        \label{fig:progressive_glitching}
+    \end{subfigure}
+
+    \begin{subfigure}{.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{progressive_glitch/final_position.png}
+        \caption{Final position.}
+        \label{fig:progressive_final}
+    \end{subfigure}
+    \caption{Final map view of the progressive GPS spoofing.}
+    \label{fig:final_progressive_spoofing}
+\end{figure}
+
+As the drone reaches the last waypoint, it will start the landing procedure while the glitch is still being applied but not incremented (Figure \ref{fig:progressive_arriving}). After the landing procedure is completed, the glitch is then reset to zero and the incoerence between the believed GPS position and the real one can be seen as the drone icon is duplicated in the ground station (Figure \ref{fig:progressive_glitching}). After a few seconds, the GPS position is realigned with the estimated vehicle position and the two displayed positions are aligned again showing the effectiveness of the spoofing (Figure \ref{fig:progressive_final}).
+
+\iffalse
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=.95\linewidth]{progressive_glitch/arriving_position.png}
+        \caption{Map view of progressive glitch test.}
+        \label{fig:progressive_glitch_arriving}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=.95\linewidth]{progressive_glitch/glitching_position.png}
+        \caption{Map view of progressive glitch test.}
+        \label{fig:progressive_glitch_glitching}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=.95\linewidth]{progressive_glitch/final_position.png}
+        \caption{Map view of progressive glitch test.}
+        \label{fig:progressive_glitch_final}
+    \end{figure}
+\fi
