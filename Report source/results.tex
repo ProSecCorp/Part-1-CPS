@@ -1,1 +1,24 @@
 \section{Results}
+
+\subsection{Fixed GPS Spoofing}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{.5\textwidth}
+        \includegraphics[width=\linewidth]{Data/Images/small_glitch_0.00003/small_gps_spoof.png}
+        \caption{Small glitch test.}
+        \label{fig:small_glitch_graph}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Data/Images/big_glitch_0.00006/big_gps_spoof.png}
+        \caption{Big glitch test.}
+        \label{fig:big_glitch_graph}
+    \end{subfigure}
+    \caption{Graphs of the fluctuations in the GPS position during the fixed GPS spoofing tests.}
+\end{figure}
+
+As can be seen in both figures, the introduction of the glitch is clearly visible in the graph, with a sudden jump in the GPS position corresponding to the applied offset. In the case of the small glitch (Figure \ref{fig:small_glitch_graph}), the jump is relatively minor, and the GPS position quickly returns to its original trajectory. In contrast, the big glitch (Figure \ref{fig:big_glitch_graph}) shows a more pronounced jump both when it is introduced and when it is reset, followed by messages stating the detection of a GPS glitch and the subsequent realignment of the GPS position with the estimated vehicle position. Notable is the presence of EKF3 lane switch and EKF3 primary changed events, which indicate a change in the EKF3 estimator configuration as the system compensates for the inconsistent GPS measurements.%and choose a better sensor to rely on. The GPS position eventually realigns with the estimated vehicle position, demonstrating the system's ability to recover from the introduced glitch.
+
+\subsection{Progressive/Adaptive GPS Spoofing}
+
