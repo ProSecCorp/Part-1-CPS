@@ -22,3 +22,15 @@ As can be seen in both figures, the introduction of the glitch is clearly visibl
 
 \subsection{Progressive/Adaptive GPS Spoofing}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{progressive_glitch/progressive_gps_spoof.png}
+    \caption{Graph of the fluctuations in the GPS position during the progressive GPS spoofing test.}
+    \label{fig:progressive_glitch_graph}
+\end{figure}
+
+The graph in Figure \ref{fig:progressive_glitch_graph} compares the GPS trajectory obtained during the progressive spoofing test with the trajectory recorded in the absence of spoofing. Throughout most of the experiment, the two trajectories overlap almost completely, indicating that the progressive increase of the applied glitch does not produce a detectable GPS glitch or compass error. The flight controller therefore continues to accept the GPS measurements and the vehicle follows the intended trajectory without triggering the previously observed glitch protection mechanisms.
+
+A significant difference can instead be observed at the end of the experiment, when the applied glitch is reset to zero. This sudden removal of the offset causes an abrupt discontinuity in the spoofed GPS position, visible as the dashed blue segment extending towards the right-hand side of the figure. This segment should be interpreted in the opposite direction, from right to left: the GPS position first jumps away from the previously followed trajectory and then progressively returns towards the final position of the non-spoofed trajectory as the GPS position is realigned with the estimated vehicle position.
+
+This behaviour is consistent with the sudden removal of the accumulated GPS offset. While the progressive spoofing phase allows the GPS position to remain sufficiently close to the position expected by the flight controller, resetting the glitch instantaneously removes the accumulated displacement. The resulting discrepancy is therefore much larger and produces the visible transient realignment at the end of the experiment.
