@@ -1,14 +1,10 @@
 \section{Introduction}
-Unmanned Aerial Vehicles (UAVs) have progressively evolved from remotely controlled aircraft into complex autonomous Cyber-Physical Systems (CPS).
+\glspl{uav} have progressively evolved from remotely controlled aircraft into complex autonomous \glspl{cps}.
+Modern \glspl{uav} are capable of executing missions with limited human intervention, autonomously following predefined trajectories, reaching waypoints and performing operations such as take-off, hovering and landing.
 
-Modern UAVs are capable of executing missions with limited human intervention, autonomously following predefined trajectories, reaching waypoints, and performing operations such as take-off, hovering, and landing.
+This increasing level of autonomy also introduces new security challenges. The correct operation of an autonomous \gls{uav} depends on the interaction between physical sensors, navigation algorithms, embedded control systems and communication interfaces.
+Consequently, manipulating a sensor input may affect the physical behavior of the vehicle even when the underlying flight-control software and mission remain unchanged.
 
-This increasing level of autonomy also introduces new security challenges. The correct operation of an autonomous UAV depends on the interaction between physical sensors, navigation algorithms, embedded control systems, and communication interfaces.
-
-Consequently, manipulating a sensor input may affect the physical behaviour of the vehicle even when the underlying flight-control software and mission remain unchanged.
-
-Among the sensors used for autonomous navigation, Global Navigation Satellite Systems (GNSS) are particularly important. Position information obtained from GNSS receivers is commonly combined with inertial measurements to estimate the state of the vehicle and control its trajectory.
-
-GPS spoofing represents a relevant threat in this context. Instead of disrupting the availability of the navigation system, a spoofing attack attempts to provide misleading position information to the receiver.
-
+Among the sensors used for autonomous navigation, \gls{gnss} are particularly important. Position information obtained from \gls{gnss} receivers is commonly combined with inertial measurements to estimate the state of the vehicle and control its trajectory.
+\gls{gps} spoofing represents a relevant threat in this context. Instead of disrupting the availability of the navigation system, a spoofing attack attempts to provide misleading position information to the receiver.
 If the manipulated measurements are considered valid by the flight controller, the resulting position estimate may differ from the physical position of the vehicle.

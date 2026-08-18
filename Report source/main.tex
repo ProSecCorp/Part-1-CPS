@@ -1,6 +1,7 @@
 \documentclass[a4paper]{article} %article or report
 
 \input{setup}
+\input{acronyms}
 
 \begin{document}
 
@@ -15,5 +16,12 @@
 \input{system-setup}
 \input{experiments}
 \input{results}
+
+\clearpage
+\printglossary[type=\acronymtype,title=Acronyms]
+
+\clearpage
+\bibliographystyle{plain}
+\bibliography{references}
 
 \end{document}

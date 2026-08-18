@@ -8,10 +8,13 @@ Cyber-Physical Systems and IoT Security (MSc ICT for Internet and Multimedia, A.
 
 ## Members
 - Emanuele Artusi | 2198545
-- Filippo Bellon | XXXXXXX
+- Filippo Bellon | 2199368
 
 ## Reference paper
 [Tractor Beam: Safe-hijacking of Consumer Drones with Adaptive GPS Spoofing](./Reference-paper.pdf)
+
+## Report document
+[Report](./Report.pdf)
 
 ## Setup
 ### LaTeX
@@ -21,7 +24,7 @@ To enable custom output paths and file naming via `latexmkrc`, the default LaTeX
   {
     "name": "latexmk-custom",
     "command": "latexmk",
-    "args": ["-pdf", "%DOC%"]
+    "args": ["-pdf", "-shell-escape", "-enable-write18", "%DOC%"]
   }
 ],
 
