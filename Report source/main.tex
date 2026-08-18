@@ -2,6 +2,7 @@
 
 \input{setup}
 \input{acronyms}
+\makeglossaries
 
 \begin{document}
 
@@ -18,10 +19,10 @@
 \input{results}
 
 \clearpage
-\printglossary[type=\acronymtype,title=Acronyms]
-
-\clearpage
 \bibliographystyle{plain}
 \bibliography{references}
+
+\clearpage
+\printglossary[type=\acronymtype,title=Acronyms]
 
 \end{document}
