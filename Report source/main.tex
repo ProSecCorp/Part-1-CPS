@@ -19,10 +19,12 @@
 \input{results}
 
 \clearpage
-\bibliographystyle{plain}
-\bibliography{references}
+\addcontentsline{toc}{section}{Acronyms}
+\printglossary[type=\acronymtype,title=Acronyms]
 
 \clearpage
-\printglossary[type=\acronymtype,title=Acronyms]
+\addcontentsline{toc}{section}{References}
+\bibliographystyle{plain}
+\bibliography{references}
 
 \end{document}
