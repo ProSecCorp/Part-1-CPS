@@ -1,10 +1,15 @@
 \section{Objectives}
-This work investigates the effects of controlled GPS manipulation on an autonomous UAV using ArduPilot SITL. The objective is not to modify the flight controller or the mission itself, but to study whether a UAV following a predefined waypoint mission can be progressively displaced by manipulating only its simulated GPS information.
+This work investigates the effects of controlled \gls{gps} manipulation on an autonomous \gls{uav} using ArduPilot SITL.
+The objective is not to modify the flight controller or the mission itself, but to study whether a \gls{uav} following a predefined waypoint mission can be progressively displaced by manipulating only its simulated \gls{gps} information.
 
-The experimental study focuses on two increasingly complex scenarios: a constant GPS offset and an adaptive/progressive position-manipulation strategy. The latter is inspired by the concept of safe-hijacking introduced by Noh et al.~\cite{noh2019tractorbeam}, but is implemented in a simplified software-in-the-loop environment. The main objectives of the work are therefore:
+The experimental study focuses on two increasingly complex scenarios: a constant \gls{gps} offset and an adaptive/progressive position-manipulation strategy.
+The latter is inspired by the concept of safe-hijacking introduced by Noh et al. \cite{noh2019tractorbeam}, but is implemented in a simplified \gls{sitl} environment.
 
+The main objectives of the work are therefore:
 \begin{itemize}
-    \item to understand the interaction between GPS measurements and UAV navigation; \item to analyze the GPS glitch detection mechanisms implemented by ArduCopter; \item to determine the relationship between the magnitude and evolution of a GPS offset and the resulting UAV behaviour;
+    \item to understand the interaction between \gls{gps} measurements and \gls{uav} navigation;
+    \item to analyze the \gls{gps} glitch detection mechanisms implemented by ArduCopter;
+    \item to determine the relationship between the magnitude and evolution of a \gls{gps} offset and the resulting \gls{uav} behavior;
     \item to investigate whether a progressive manipulation can influence the trajectory while remaining within the limits imposed by the navigation system;
     \item to quantitatively evaluate the resulting deviation from the original mission.
 \end{itemize}
