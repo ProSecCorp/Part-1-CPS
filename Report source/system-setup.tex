@@ -3,8 +3,6 @@ First thing we want to do is setting up Ardupilot \gls{sitl}.
 We do that by following the official guide to make it work under the \gls{wsl} system on a Windows 11 \gls{pc}.
 This will also create a special Python environment to better manage packages and modules needed to run Ardupilot.
 
-\gls{api}
-
 After setting all up we start it up by using a special command:
 \begin{minted}[breaklines]{bash}
     python3 /home/darckat038/uni/cps/ardupilot/Tools/autotest/sim_vehicle.py -v ArduCopter --console --map --mavproxy-args="--load-module=batteryreset --out=127.0.0.1:14550 --out=127.0.0.1:14549 --out=127.0.0.1:14548 --out=127.0.0.1:14547 --out=127.0.0.1:14546 --out=127.0.0.1:14545 --cmd=\"param set RTL_ALT_FINAL_M 15\""
