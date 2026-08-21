@@ -5,7 +5,6 @@
 <h1 align="center">Professional Security Corporation</h1>
 <p align="center">Project for the Course on
 Cyber-Physical Systems and IoT Security (MSc ICT for Internet and Multimedia, A.Y. 2025/26) at University of Padua.</p>
-<p align="center">All project source files are in the Source directory.</p>
 
 ## Members
 - Emanuele Artusi | 2198545
@@ -18,6 +17,9 @@ Cyber-Physical Systems and IoT Security (MSc ICT for Internet and Multimedia, A.
 [Report](./Report.pdf)
 
 ## Setup
+### Project
+All project source files are in the [Source directory](./Source/).
+
 ### LaTeX
 To enable custom output paths and file naming via `latexmkrc`, the default LaTeX Workshop recipe must be replaced with a minimal one. Add the following entries to your VS Code `settings.json`:
 ```
