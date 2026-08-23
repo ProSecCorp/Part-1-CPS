@@ -5,10 +5,10 @@ As we said before, we wanted to test two different types of \gls{gps} spoofing:
     \item progressive/adaptive \gls{gps} spoofing, in which we will increment the offset as the drone moves along a specific multi-point trajectory, adapting the increment in relation to the speed and desired spoofing direction.
 \end{enumerate}
 
-\subsection{Fixed GPS Spoofing}
+\subsection{Fixed GPS spoofing}
 Let's first test \gls{gps} spoofing with a fixed offset approach, where we discuss both the small one and the big one.
 
-\subsubsection{Small Offset}
+\subsubsection{Small offset}
 The offset that has been tested is a \textbf{0.00003°} offset, which is applied to the \textbf{x-axis}.
 This value was chosen because, after several tests, it was found to be the maximum value at which the system does not detect a change large enough to cause the flight controller to go into error mode and for the \gls{gps} to glitch.
 
@@ -38,7 +38,7 @@ After approximately 30 seconds, the glitch is reset to zero.
 Following the reset, the trajectory exhibits another small variation, also visible through the yellow dashed line in Figure~\ref{fig:small_glitch_end}.
 In this case, however, the resulting position discrepancy remains sufficiently small that it does not trigger a \gls{gps} glitch warning from the flight controller.
 
-\subsubsection{Big Offset}
+\subsubsection{Big offset}
 The offset has been increased to \textbf{0.00006°} and applied again to the \textbf{x-axis}, this time with the purpose of observing the behavior of the software and, in particular, the drone \gls{gps}.
 
 \begin{figure}[H]
@@ -89,7 +89,7 @@ When the glitch value is reset to zero, the \gls{gps} position changes back towa
 As a result, the two trajectories temporarily diverge once more before progressively converging.
 The flight controller, consequently, performs the necessary estimator adjustments to accommodate the change in the \gls{gps} measurement, after which the \gls{gps} position is once again considered consistent, and the \texttt{\gls{gps} Glitch cleared} message is generated (Figure \ref{fig:big_glitch_end_realign}).
 
-\subsection{Progressive/Adaptive GPS Spoofing}
+\subsection{Progressive/Adaptive GPS spoofing}
 As the final test we then proceded with a progressive \gls{gps} spoofing approach, where the offset is incrementally increased as the drone moves along a predefined multi-point trajectory.
 The goal of this test was to observe how the flight controller adapts to gradually changing \gls{gps} measurements and whether it can maintain stable flight under these conditions without going into an error state.
 

@@ -23,7 +23,7 @@ With this command we are able to:
           \end{figure}
 \end{itemize}
 
-\section{Python Helper}
+\section{Python helper}
 To better achieve what we need we decided to create multiple Python classes, thus dividing responsibilities among multiple parts of the program.
 
 \subsection{GPSReader}
@@ -41,6 +41,6 @@ The \texttt{GlitchController} class, as the name says, had the obvious goal of s
 \subsection{FlightLogger}
 To \texttt{FlightLogger} class has then been given the task of logging every step of the \gls{gps} of the drone, along with the currently set glitch and any events that may occur during the spoofing period.
 
-\subsection{Other Utils}
+\subsection{Other utils}
 \subsubsection{Distance}
 A \texttt{distance} method has been written to compute the distance between two coordinates and help with the progressive/adaptive glitch computations and development.
