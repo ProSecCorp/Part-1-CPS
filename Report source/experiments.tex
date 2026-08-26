@@ -25,7 +25,7 @@ This value was chosen because, after several tests, it was found to be the maxim
         \caption{The small glitch is reset.}
         \label{fig:small_glitch_end}
     \end{subfigure}
-    \caption{Map view of small glitch test.}
+    \caption{Map view of constant small glitch test.}
 \end{figure}
 
 As shown in the figure, the glitch is introduced after the drone has entered \texttt{AUTO} mode and started following the predefined mission trajectory.
@@ -54,7 +54,7 @@ The offset has been increased to \textbf{0.00006°} and applied again to the \te
         \caption{The big glitch is still applied but the GPS clears it.}
         \label{fig:big_glitch_start_realign}
     \end{subfigure}
-    \caption{Map view of big glitch applied.}
+    \caption{Map view of constant big glitch applied.}
 \end{figure}
 
 As soon as the glitch is applied, the drone icon appears to be duplicated in the ground station, with a second trajectory developing in parallel to the original one (Figure ~\ref{fig:big_glitch_start_middle}).
@@ -81,7 +81,7 @@ Once the inconsistency has been resolved, the system reports \texttt{\gls{gps} G
         \caption{The big glitch is removed and the GPS clears the mismatch.}
         \label{fig:big_glitch_end_realign}
     \end{subfigure}
-    \caption{Map view of big glitch removed.}
+    \caption{Map view of constant big glitch removed.}
 \end{figure}
 
 A similar transition can be observed when the injected glitch is removed.
@@ -122,7 +122,7 @@ Given that the test mission is composed of three waypoints and a final landing o
         \caption{Final realigned position.}
         \label{fig:progressive_final}
     \end{subfigure}
-    \caption{Final map view of the progressive GPS spoofing.}
+    \caption{Final map view of the adaptaptive/progressive GPS spoofing.}
     \label{fig:final_progressive_spoofing}
 \end{figure}
 
