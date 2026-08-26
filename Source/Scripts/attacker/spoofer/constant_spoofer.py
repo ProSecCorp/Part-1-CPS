@@ -9,7 +9,7 @@ from monitor.flight_monitor import FlightMonitor
 GLITCH_X = 0      #max ~ 0.000032
 GLITCH_Y = 0
 
-ATTACK_TIME = 30
+ATTACK_TIME = 15
 
 MIN_ALT = 10
 
