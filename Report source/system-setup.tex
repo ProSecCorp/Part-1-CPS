@@ -24,7 +24,7 @@ With this command we are able to:
 \end{itemize}
 
 \section{Python helper}
-To better achieve what we need we decided to create multiple Python classes, thus dividing responsibilities among multiple parts of the program.
+To better achieve what we need we decided to create multiple Python classes, thus dividing responsibilities among multiple parts of the program. These files can be found in the \texttt{Source/Scripts/attacker} folder present in the project directory, each one under a specific subfolder.
 
 \subsection{GPSReader}
 The first and most important is the \texttt{GPSReader} class.
@@ -44,3 +44,7 @@ To \texttt{FlightLogger} class has then been given the task of logging every ste
 \subsection{Other utils}
 \subsubsection{Distance}
 A \texttt{distance} method has been written to compute the distance between two coordinates and help with the progressive/adaptive glitch computations and development.
+
+\subsubsection{Plotting}
+A \texttt{plots} file has been written to plot the logged flight data and visualize the drone trajectory and the glitch injection to better understand the effects of the constant glitch injection on the drone flight.
+A \texttt{plot\_diff} file has also been written to plot the difference between the logged flight data and the original mission trajectory to better visualize the effects and the deviation from the original path, in particular for the adaptive/progressive glitch injection.
