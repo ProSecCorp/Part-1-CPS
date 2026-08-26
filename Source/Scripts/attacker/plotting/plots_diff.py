@@ -71,7 +71,7 @@ def plot_file(filename, line_label, line_color, line_style, event_offset):
 
 
 choice = input(
-    "Scegli il confronto (1=small_glitch vs no_glitch, 2=big_glitch vs no_glitch): "
+    "Choose the comparison (1=small_glitch vs no_glitch, 2=big_glitch vs no_glitch): "
 ).strip()
 
 if choice == "1":
@@ -87,11 +87,11 @@ elif choice == "2":
     primary_style = "--"
     no_glitch_color = LEGEND_COLORS[1]
 else:
-    print("Scelta non valida: inserisci 1 oppure 2")
+    print("Invalid choice: please enter 1 or 2")
     raise SystemExit(1)
 
 if not Path(primary_file).exists():
-    print(f"File mancante: {primary_file}")
+    print(f"File not found: {primary_file}")
     raise SystemExit(1)
 
 no_glitch_file = "logs/constant_no_glitch.csv"

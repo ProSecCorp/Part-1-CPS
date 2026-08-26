@@ -16,7 +16,7 @@ class GlitchController:
         self.master = mavutil.mavlink_connection(connection)
         self.master.wait_heartbeat()
 
-        print("GlitchController connesso.")
+        print("GlitchController connected.")
 
     def _set_parameter(self, name, value):
 

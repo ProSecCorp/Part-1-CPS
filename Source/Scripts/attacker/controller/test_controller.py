@@ -3,11 +3,11 @@ import time
 
 gps = GlitchController()
 
-print("\nValori iniziali:")
+print("\nInitial values:")
 
 print(gps.get_glitch())
 
-print("\nImposto glitch...")
+print("\nSetting glitch...")
 
 gps.set_glitch(
     0.00002,

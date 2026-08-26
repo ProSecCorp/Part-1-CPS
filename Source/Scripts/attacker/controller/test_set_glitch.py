@@ -3,15 +3,15 @@ import time
 
 gps = GlitchController()
 
-print("\nValori iniziali:")
+print("\nInitial values:")
 
 print(gps.get_glitch())
 
 choice = input(
-    "Inserisci il valore del glitch x: "
+    "Enter the x value for the glitch: "
 ).strip()
 
-print("\nImposto glitch...")
+print("\nSetting glitch...")
 
 gps.set_glitch(
     float(choice),

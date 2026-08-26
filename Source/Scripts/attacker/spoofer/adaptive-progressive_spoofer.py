@@ -10,7 +10,7 @@ import threading
 import csv
 from datetime import datetime
 
-print("Connessione ad ArduPilot...")
+print("Connecting to ArduPilot...")
 
 glitch = GlitchController()
 gps = GPSReader()
@@ -97,7 +97,7 @@ def adjust_glitch_increment(airspeed):
     Regola l'incremento del glitch in base alla velocità aerea corrente.
     a 10 m/s incrementa di 0.00005, le altre velocità rapportate
     """
-    print(f"Velocità aerea corrente: {airspeed} m/s")
+    print(f"Current airspeed: {airspeed} m/s")
     
     if airspeed is None:
         return 0
@@ -114,7 +114,7 @@ def check_glitch_detection():
     Controlla se il glitch è stato rilevato dal drone.
     """
     if monitor.get_statustext_events(["AP: GPS Glitch or Compass error"]):
-        print(f"Glitch rilevato con x_glitch = {x_glitch}")
+        print(f"Glitch detected with x_glitch = {x_glitch}")
         return True
     return False
 
@@ -126,63 +126,63 @@ def spoof_to_direction(direction):
     
     match direction:
         case "0":  # NESSUNA DIREZIONE
-            print("Nessuna direzione selezionata")
+            print("No direction selected")
             x_glitch_increment = 0
             y_glitch_increment = 0
             log = FlightLogger("logs/adaptive_no_direction_glitch.csv")
         case "1":  # NORD
-            print("Direzione NORD selezionata")
+            print("NORD direction selected")
             x_glitch_increment = -0.00001
             y_glitch_increment = 0
             log = FlightLogger("logs/adaptive_nord_glitch.csv")
         case "5":  # SUD
-            print("Direzione SUD selezionata")
+            print("SUD direction selected")
             x_glitch_increment = 0.00001
             y_glitch_increment = 0
             log = FlightLogger("logs/adaptive_sud_glitch.csv")
         case "3":  # EST
-            print("Direzione EST selezionata")
+            print("EST direction selected")
             x_glitch_increment = 0
             y_glitch_increment = -0.00001
             log = FlightLogger("logs/adaptive_est_glitch.csv")
         case "7":  # OVEST
-            print("Direzione OVEST selezionata")
+            print("WEST direction selected")
             x_glitch_increment = 0
             y_glitch_increment = 0.00001
             log = FlightLogger("logs/adaptive_ovest_glitch.csv")
         case "2":  # NORD-EST
-            print("Direzione NORD-EST selezionata")
+            print("NORD-EST direction selected")
             x_glitch_increment = -0.00001
             y_glitch_increment = -0.00001
             log = FlightLogger("logs/adaptive_nord_est_glitch.csv")
         case "8":  # NORD-OVEST
-            print("Direzione NORD-OVEST selezionata")
+            print("NORD-WEST direction selected")
             x_glitch_increment = -0.00001
             y_glitch_increment = 0.00001
             log = FlightLogger("logs/adaptive_nord_ovest_glitch.csv")
         case "4":  # SUD-EST
-            print("Direzione SUD-EST selezionata")
+            print("SUD-EST direction selected")
             x_glitch_increment = 0.00001
             y_glitch_increment = -0.00001
             log = FlightLogger("logs/adaptive_sud_est_glitch.csv")
         case "6":  # SUD-OVEST
-            print("Direzione SUD-OVEST selezionata")
+            print("SUD-WEST direction selected")
             x_glitch_increment = 0.00001
             y_glitch_increment = 0.00001
             log = FlightLogger("logs/adaptive_sud_ovest_glitch.csv")
         case _:
-            print("Scelta non valida")
+            print("Invalid choice")
             raise SystemExit(1)
 
 choice = input("\n" +
     "   NORD          NORD (1)     NORD\n" +
-    "   OVEST (8)                  EST (2) \n" +
+    "   WEST (8)                  EST (2) \n" +
     "  -----------  ⇖   ⇑   ⇗   -----------\n" +
-    "   OVEST (7)   ⇐       ⇒     EST (3) \n" +
+    "   WEST (7)    ⇐       ⇒     EST (3) \n" +
     "  -----------  ⇙   ⇓   ⇘   -----------\n" +
     "   SUD (6)                    SUD (4) \n" +
-    "   OVEST          SUD (5)     EST     \n\n" +
-    "Scegli direzione del glitch: "
+    "   WEST          SUD (5)     EST     \n\n" +
+    "Choose glitch direction: "
 ).strip()
 
 spoof_to_direction(choice)  # Imposta l'incremento del glitch in base alla direzione scelta
@@ -198,10 +198,10 @@ try:
     time.sleep(5)  # Attendi 5 secondi prima di iniziare l'attacco
 
     ###################################
-    #        PRIMO WAYPOINT           #
+    #        FIRST WAYPOINT           #
     ###################################
 
-    print("Glitch primo waypoint")
+    print("Glitch first waypoint")
     
     reset_variables_for_next_waypoint()  # Inizializza le variabili per il primo waypoint
 
@@ -222,8 +222,8 @@ try:
         
         glitch.set_glitch(x_glitch, y_glitch)
         
-        print(f"Valore corrente di x_glitch: {x_glitch}")
-        print(f"Valore corrente di y_glitch: {y_glitch}")
+        print(f"Current value of x_glitch: {x_glitch}")
+        print(f"Current value of y_glitch: {y_glitch}")
         
         # Glitch detection section
         
@@ -244,21 +244,21 @@ try:
         
         time.sleep(1)
         
-    print("Velocità aerea troppo bassa o waypoint vicino, stop glitching")
+    print("Current airspeed too low or next waypoint is close, stopping glitching")
         
-    print("Attesa secondo waypoint")
+    print("Waiting for second waypoint")
         
     monitor.wait_for_next_waypoint(current_waypoint_seq)  # Attendi il passaggio al secondo waypoint
 
     ###################################
-    #        SECONDO WAYPOINT         #
+    #        SECOND WAYPOINT          #
     ###################################
         
-    print("Glitch secondo waypoint")
+    print("Glitch second waypoint")
     
     # Reset variabili
     
-    print("Reset variabili per il secondo waypoint")
+    print("Resetting variables for the second waypoint")
         
     reset_variables_for_next_waypoint()  # Inizializza le variabili per il secondo waypoint
         
@@ -279,8 +279,8 @@ try:
         
         glitch.set_glitch(x_glitch, y_glitch)
         
-        print(f"Valore corrente di x_glitch: {x_glitch}")
-        print(f"Valore corrente di y_glitch: {y_glitch}")
+        print(f"Current value of x_glitch: {x_glitch}")
+        print(f"Current value of y_glitch: {y_glitch}")
         
         # Glitch detection section
         
@@ -301,21 +301,21 @@ try:
         
         time.sleep(1)
     
-    print("Velocità aerea troppo bassa o waypoint vicino, stop glitching")
+    print("Current airspeed too low or next waypoint is close, stopping glitching")
         
-    print("Attesa terzo waypoint")
+    print("Waiting for third waypoint")
         
     monitor.wait_for_next_waypoint(current_waypoint_seq)  # Attendi il passaggio al terzo waypoint
 
     ###################################
-    #        TERZO WAYPOINT           #
+    #        THIRD WAYPOINT           #
     ###################################
 
-    print("Glitch terzo waypoint")
+    print("Glitch third waypoint")
     
     # Reset variabili
     
-    print("Reset variabili per il terzo waypoint")
+    print("Resetting variables for the third waypoint")
     
     reset_variables_for_next_waypoint()  # Inizializza le variabili per il terzo waypoint
         
@@ -336,8 +336,8 @@ try:
         
         glitch.set_glitch(x_glitch, y_glitch)
         
-        print(f"Valore corrente di x_glitch: {x_glitch}")
-        print(f"Valore corrente di y_glitch: {y_glitch}")
+        print(f"Current value of x_glitch: {x_glitch}")
+        print(f"Current value of y_glitch: {y_glitch}")
         
         # Glitch detection section
         
@@ -358,13 +358,13 @@ try:
         
         time.sleep(1)
         
-    print("Attesa landing")
+    print("Waiting for landing")
     
     reset_variables_for_next_waypoint()  # Inizializza le variabili per il landing waypoint
 
     monitor.wait_for_next_waypoint(current_waypoint_seq)  # Attendi il passaggio al landing waypoint
         
-    print("Waypoint di atterraggio raggiunto")
+    print("Landing waypoint reached")
 
     time.sleep(10)  # Attendi 10 secondi che atterri prima di resettare il glitch
     
@@ -378,11 +378,11 @@ finally:
     
     time.sleep(30)  # Attendi 30 secondi prima di chiudere il log
     
-    print("\nFine Logging...")
+    print("\nStopping logging...")
 
     logging_active = False
 
     # Aspetta che il logger finisca il ciclo corrente
     logger_thread.join(timeout=2)
 
-    print("Fine.")
+    print("Logging stopped. Program finished.")

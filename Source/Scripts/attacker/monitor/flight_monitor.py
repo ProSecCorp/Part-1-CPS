@@ -7,7 +7,7 @@ class FlightMonitor:
             self.master = mavutil.mavlink_connection(connection)
             self.master.wait_heartbeat()
     
-            print("FlightMonitor connesso")
+            print("FlightMonitor connected.")
 
     def get_current_mode(self):
         """
@@ -24,13 +24,13 @@ class FlightMonitor:
         """
         Blocca l'esecuzione finché il drone non entra nella modalità richiesta.
         """
-        print(f"In attesa della modalità: {target_mode}...")
+        print(f"Waiting for mode: {target_mode}...")
         while True:
             msg = self.master.recv_match(type='HEARTBEAT', blocking=True, timeout=1.0)
             if msg and msg.get_srcSystem() == self.master.target_system:
                 current_mode = self.master.flightmode
                 if current_mode == target_mode:
-                    print(f"Modalità {target_mode} raggiunta!")
+                    print(f"Mode {target_mode} reached!")
                     return True
             time.sleep(check_interval)
             
@@ -39,17 +39,17 @@ class FlightMonitor:
         Richiede la lista dei waypoint e restituisce l'indice (seq) 
         del primo waypoint con comando MAV_CMD_NAV_LAND (ID 21).
         """
-        print("Richiesta lista waypoint alla Ground Station / Autopilota...")
+        print("Requesting waypoint list from Ground Station / Autopilot...")
         self.master.waypoint_request_list_send()
         
         # Attende il messaggio MISSION_COUNT
         msg = self.master.recv_match(type='MISSION_COUNT', blocking=True, timeout=timeout)
         if not msg:
-            print("⚠️ Impossibile scaricare il numero di waypoint (Timeout).")
+            print("! Unable to retrieve waypoint count (Timeout). !")
             return None
         
         count = msg.count
-        print(f"Trovati {count} waypoint nella missione.")
+        print(f"Waypoint count received: {count}. Searching for NAV_LAND waypoint...")
 
         land_seq = None
         for i in range(count):
@@ -71,7 +71,7 @@ class FlightMonitor:
                 # 21 = MAV_CMD_NAV_LAND
                 if item.command == mavutil.mavlink.MAV_CMD_NAV_LAND:
                     land_seq = item.seq
-                    print(f"Waypoint di atterraggio (NAV_LAND) trovato all'indice: {land_seq}")
+                    print(f"Found NAV_LAND waypoint at seq: {land_seq}.")
                     break
 
         return land_seq
@@ -120,12 +120,12 @@ class FlightMonitor:
         """
         Blocca l'esecuzione finché il drone non passa al waypoint successivo.
         """
-        print(f"In attesa del passaggio dal waypoint {current_seq} al successivo...")
+        print(f"Waiting for passage from waypoint {current_seq} to the next...")
         while True:
             msg = self.master.recv_match(type='MISSION_CURRENT', blocking=True, timeout=1.0)
             if msg and msg.get_srcSystem() == self.master.target_system:
                 if msg.seq != current_seq:
-                    print(f"Passato al waypoint {msg.seq}.")
+                    print(f"Passed to waypoint {msg.seq}.")
                     return msg.seq
             time.sleep(check_interval)
 
