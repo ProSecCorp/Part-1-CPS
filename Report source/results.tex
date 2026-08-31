@@ -19,7 +19,7 @@
 As can be seen in both figures, the introduction of the glitch is clearly visible in the graph, with a sudden jump in the \gls{gps} position corresponding to the applied offset.
 In the case of the small glitch (Figure \ref{fig:small_glitch_graph}), the jump is relatively minor, and the \gls{gps} position quickly returns to its original trajectory.
 In contrast, the big glitch (Figure \ref{fig:big_glitch_graph}) shows a more pronounced jump both when it is introduced and when it is reset, followed by messages stating the detection of a \gls{gps} glitch and the subsequent realignment of the \gls{gps} position with the estimated vehicle position.
-Notable is the presence of \gls{ekf}3 lane switch and \gls{ekf}3 primary changed events, which indicate a change in the \gls{ekf}3 estimator configuration as the system compensates for the inconsistent \gls{gps} measurements. %and choose a better sensor to rely on. The \gls{gps} position eventually realigns with the estimated vehicle position, demonstrating the system's ability to recover from the introduced glitch.
+Notable is the presence of \gls{ekf}3 lane switch and \gls{ekf}3 primary changed events, which indicate a change in the \gls{ekf}3 estimator configuration as the system compensates for the inconsistent \gls{gps} measurements.
 
 \subsection{Progressive/Adaptive GPS spoofing}
 \begin{figure}[H]
