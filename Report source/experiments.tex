@@ -6,7 +6,7 @@ As we said before, we wanted to test two different types of \gls{gps} spoofing:
 \end{enumerate}
 
 \subsection{Fixed/Constant GPS spoofing}
-Let's first test \gls{gps} spoofing with a fixed offset approach, where we discuss both the small one and the big one. The main file used for this test is located at \texttt{Source/Scripts/attacker/spoofer/constant} and is named \texttt{constant\_spoofer.py}.
+Let's first test \gls{gps} spoofing with a fixed offset approach, where we discuss both the small one and the big one. The main file used for this test is located at \texttt{Source/Scripts/attacker/spoofer/} and is named \texttt{constant\_spoofer.py}.
 
 \subsubsection{Small offset}
 The offset that has been tested is a \textbf{0.00003°} offset, which is applied to the \textbf{x-axis}.
@@ -93,7 +93,7 @@ The flight controller, consequently, performs the necessary estimator adjustment
 As the final test we then proceded with a progressive \gls{gps} spoofing approach, where the offset is incrementally increased as the drone moves along a predefined multi-point trajectory.
 The goal of this test was to observe how the flight controller adapts to gradually changing \gls{gps} measurements and whether it can maintain stable flight under these conditions without going into an error state.
 
-The main file used for this test is located inside \texttt{Source/Scripts/attacker/spoofer/progressive} folder and is called \texttt{adaptive-progressive\_spoofer.py}.
+The main file used for this test is located inside \texttt{Source/Scripts/attacker/spoofer/} folder and is called \texttt{adaptive-progressive\_spoofer.py}.
 
 First of all the program asks the user to input the desired spoofing direction, which can be either \textbf{North}, \textbf{South}, \textbf{East}, \textbf{West} or their combinations.
 Then sets an offset increment to the glitch of 0.00001° and applies it to the x-axis and/or y-axis depending on the chosen direction (for example in this experiment we choose to spoof North-East so the program will apply a -0.00001° offset increment to the x-axis and a 0.00001° offset increment to the y-axis).
