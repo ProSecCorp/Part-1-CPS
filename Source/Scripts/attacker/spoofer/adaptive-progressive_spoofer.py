@@ -131,17 +131,17 @@ def spoof_to_direction(direction):
             y_glitch_increment = 0
             log = FlightLogger("logs/adaptive_no_direction_glitch.csv")
         case "1":  # NORD
-            print("NORD direction selected")
+            print("NORTH direction selected")
             x_glitch_increment = -0.00001
             y_glitch_increment = 0
             log = FlightLogger("logs/adaptive_nord_glitch.csv")
         case "5":  # SUD
-            print("SUD direction selected")
+            print("SOUTH direction selected")
             x_glitch_increment = 0.00001
             y_glitch_increment = 0
             log = FlightLogger("logs/adaptive_sud_glitch.csv")
         case "3":  # EST
-            print("EST direction selected")
+            print("EAST direction selected")
             x_glitch_increment = 0
             y_glitch_increment = -0.00001
             log = FlightLogger("logs/adaptive_est_glitch.csv")
@@ -151,22 +151,22 @@ def spoof_to_direction(direction):
             y_glitch_increment = 0.00001
             log = FlightLogger("logs/adaptive_ovest_glitch.csv")
         case "2":  # NORD-EST
-            print("NORD-EST direction selected")
+            print("NORTH-EAST direction selected")
             x_glitch_increment = -0.00001
             y_glitch_increment = -0.00001
             log = FlightLogger("logs/adaptive_nord_est_glitch.csv")
         case "8":  # NORD-OVEST
-            print("NORD-WEST direction selected")
+            print("NORTH-WEST direction selected")
             x_glitch_increment = -0.00001
             y_glitch_increment = 0.00001
             log = FlightLogger("logs/adaptive_nord_ovest_glitch.csv")
         case "4":  # SUD-EST
-            print("SUD-EST direction selected")
+            print("SOUTH-EAST direction selected")
             x_glitch_increment = 0.00001
             y_glitch_increment = -0.00001
             log = FlightLogger("logs/adaptive_sud_est_glitch.csv")
         case "6":  # SUD-OVEST
-            print("SUD-WEST direction selected")
+            print("SOUTH-WEST direction selected")
             x_glitch_increment = 0.00001
             y_glitch_increment = 0.00001
             log = FlightLogger("logs/adaptive_sud_ovest_glitch.csv")
