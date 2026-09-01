@@ -71,7 +71,7 @@ def plot_file(filename, line_label, line_color, line_style, event_offset):
 
 
 choice = input(
-    "Choose the comparison (1=small_glitch vs no_glitch, 2=big_glitch vs no_glitch): "
+    "Choose the comparison (1=small_glitch vs no_glitch, 2=big_glitch vs no_glitch, 3=adaptive_no_direction_glitch vs adaptive_nord_est_glitch): "
 ).strip()
 
 if choice == "1":
@@ -80,26 +80,43 @@ if choice == "1":
     primary_color = LEGEND_COLORS[0]
     primary_style = "--"
     no_glitch_color = LEGEND_COLORS[1]
+    no_glitch_file = "logs/constant_no_glitch.csv"
+    secondary_label = "not spoofed gps"
+    secondary_style = "-"
 elif choice == "2":
     primary_file = "logs/constant_big_glitch.csv"
     primary_label = "big value gps spoofing"
     primary_color = LEGEND_COLORS[0]
     primary_style = "--"
     no_glitch_color = LEGEND_COLORS[1]
+    no_glitch_file = "logs/constant_no_glitch.csv"
+    secondary_label = "not spoofed gps"
+    secondary_style = "-"
+elif choice == "3":
+    primary_file = "logs/adaptive_north_east_glitch.csv"
+    primary_label = "adaptive/progressive north east glitch"
+    primary_color = LEGEND_COLORS[0]
+    primary_style = "--"
+    no_glitch_color = LEGEND_COLORS[8]
+    no_glitch_file = "logs/adaptive_no_direction_glitch.csv"
+    secondary_label = "not spoofed gps"
+    secondary_style = "-"
 else:
-    print("Invalid choice: please enter 1 or 2")
+    print("Invalid choice: please enter 1, 2 or 3")
     raise SystemExit(1)
 
 if not Path(primary_file).exists():
     print(f"File not found: {primary_file}")
     raise SystemExit(1)
 
-no_glitch_file = "logs/constant_no_glitch.csv"
+if choice == "3" and not Path(no_glitch_file).exists():
+    print(f"File not found: {no_glitch_file}")
+    raise SystemExit(1)
 
 plt.figure(figsize=(12, 8))
 
 plot_file(primary_file, primary_label, primary_color, primary_style, 2)
-plot_file(no_glitch_file, "not spoofed gps", no_glitch_color, "-", 10)
+plot_file(no_glitch_file, secondary_label, no_glitch_color, secondary_style, 10)
 
 
 plt.xlabel("Longitude")
@@ -109,12 +126,13 @@ axis_formatter = ScalarFormatter(useOffset=False)
 axis_formatter.set_scientific(False)
 plt.gca().xaxis.set_major_formatter(axis_formatter)
 plt.gca().yaxis.set_major_formatter(axis_formatter)
-plt.gca().invert_xaxis()
+if choice != "3":
+    plt.gca().invert_xaxis()
 
 plt.legend()
 
 plt.grid()
 
-plt.title(f"{primary_label} VS not spoofed gps")
+plt.title(f"{primary_label} VS {secondary_label}")
 
 plt.show()

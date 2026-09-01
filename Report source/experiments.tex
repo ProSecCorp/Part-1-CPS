@@ -96,7 +96,7 @@ The goal of this test was to observe how the flight controller adapts to gradual
 The main file used for this test is located inside \texttt{Source/Scripts/attacker/spoofer/progressive} folder and is called \texttt{adaptive-progressive\_spoofer.py}.
 
 First of all the program asks the user to input the desired spoofing direction, which can be either \textbf{North}, \textbf{South}, \textbf{East}, \textbf{West} or their combinations.
-Then sets an offset increment to the glitch of 0.00001° and applies it to the x-axis and/or y-axis depending on the chosen direction (for example, to spoof North-West, the program will apply a -0.00001° offset increment to the x-axis and a 0.00001° offset increment to the y-axis).
+Then sets an offset increment to the glitch of 0.00001° and applies it to the x-axis and/or y-axis depending on the chosen direction (for example in this experiment we choose to spoof North-East so the program will apply a -0.00001° offset increment to the x-axis and a 0.00001° offset increment to the y-axis).
 
 In parallel to the offset increment, every 0.5 seconds a second thread will log the \gls{gps} position, the x-glitch, the y-glitch and any events reported by the flight controller.
 This logging process will continue until the drone reaches the last waypoint and will stop some time after the landing procedure is started.
