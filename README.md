@@ -40,3 +40,7 @@ To enable custom output paths and file naming via `latexmkrc`, the default LaTeX
 ```
 Use **latexmk (custom)** when building the report.
 This ensures LaTeX Workshop does not override `latexmkrc`, allowing the project’s custom output directory, jobname, and image paths to work as intended.
+
+## Evaluation
+### Score
+**13**/13
